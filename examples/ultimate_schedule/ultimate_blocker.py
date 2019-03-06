@@ -21,14 +21,11 @@ bot_blocker = Bot()
 bot_blocker.login()
 
 bot.logger.info("Starting blocker. Runs 24/7!")
-
 bot.logger.info("Caching followers for %s" % bot_blocker.username)
 follower_cache = set(bot.get_user_followers(bot_blocker.user_id))
 
-def stats():
-    bot.save_user_stats(bot.user_id)
-
 def block_followers_from_stalker_file():
+    global follower_cache
     bot.logger.info("Checking followers for new stalkers.")
     followers = bot.get_user_followers(bot_blocker.user_id)
     if len(followers) < len(follower_cache):
