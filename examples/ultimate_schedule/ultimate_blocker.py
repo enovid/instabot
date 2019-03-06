@@ -31,6 +31,9 @@ def stats():
 def block_followers_from_stalker_file():
     bot.logger.info("Checking followers for new stalkers.")
     followers = bot.get_user_followers(bot_blocker.user_id)
+    if len(followers) < len(follower_cache):
+        bot.logger.info("Follower count reduced - resetting cache.")
+        follower_cache = set(followers)
     new_followers = set(followers) - follower_cache
     bot.logger.info("TRACKED FOLLOWERS: %s" % len(followers))
     bot.logger.info("BLOCK WORDS: %s" % ', '.join(bot.block_words))
@@ -44,6 +47,8 @@ def block_followers_from_stalker_file():
             print(username)
         bot._followers = new_followers
         bot.block_stalkers(bot_blocker)
+        bot.logger.info("Caching followers for %s" % bot_blocker.username)
+        follower_cache = set(bot.get_user_followers(bot_blocker.user_id))
 
 def run_threaded(job_fn):
     job_thread = threading.Thread(target=job_fn)
