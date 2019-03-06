@@ -23,10 +23,10 @@ service_phone = setting_3
 debug_phone = setting_4
 
 def sendText(msg="NA"):
-	message = client.messages.create(
-		to=to_phone,
-		from_=service_phone,
-		body=msg)
+	# message = client.messages.create(
+	# 	to=to_phone,
+	# 	from_=service_phone,
+	# 	body=msg)
 	
 	message = client.messages.create(
 		to=debug_phone,
