@@ -592,8 +592,8 @@ bot = Bot(
         'vector',
         'karikatur',
         'jasa',
-        'open'])
-    # block_words=['fjjadklsjflaksdjfal', 'adskflhadshf'])
+        'open'],
+    block_words=['fjjadklsjflaksdjfal', 'adskflhadshf'])
 
 
 bot.login()
