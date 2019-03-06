@@ -617,8 +617,8 @@ class Bot(object):
     def block_bots(self):
         return block_bots(self)
     
-    def block_stalkers(self, bot_blocker=None):
-        return block_stalkers(self, bot_blocker=None)
+    def block_stalkers(self, bot_blocker):
+        return block_stalkers(self, bot_blocker)
     
     # filter
 
