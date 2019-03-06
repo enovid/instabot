@@ -22,6 +22,9 @@ def stats():
     bot.save_user_stats(bot.user_id)
 
 def block_followers_from_stalker_file():
+    bot.logger.info("Checking followers for new stalkers.")
+    followers = bot.followers
+    bot.logger.info("CURRENT FOLLOWERS: ", followers)
     bot.block_stalkers()
 
 def run_threaded(job_fn):
