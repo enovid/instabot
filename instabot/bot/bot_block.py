@@ -16,6 +16,19 @@ def block(self, user_id):
         self.logger.info("Out of blocks for today.")
     return False
 
+def block_stalker(self, user_id):
+    user_id = self.convert_to_user_id(user_id)
+    if self.check_not_stalker(user_id):
+        return True
+    if not self.reached_limit('blocks'):
+        self.logger.info("Blocking stalker.")
+        self.delay('block')
+        if self.api.block(user_id):
+            self.total['blocks'] += 1
+            return True
+    else:
+        self.logger.info("Out of blocks for today.")
+    return False
 
 def unblock(self, user_id):
     user_id = self.convert_to_user_id(user_id)
