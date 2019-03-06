@@ -90,5 +90,5 @@ def block_stalkers(self):
                              "https://instagram.com/%s/" %
                              self.get_user_info(user)[
                                  "username"])
-            self.block(user)
+            self.block_stalker(user)
             
