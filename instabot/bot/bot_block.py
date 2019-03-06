@@ -77,7 +77,7 @@ def block_bots(self):
                              "https://instagram.com/%s/" % self.get_user_info(user)["username"])
             self.block(user)
 
-def block_stalkers(self, bot_blocker=None):
+def block_stalkers(self, bot_blocker):
     self.logger.info("Going to block offending users.")
     your_followers = self.followers
     your_likers = self.get_user_likers(self.user_id)
