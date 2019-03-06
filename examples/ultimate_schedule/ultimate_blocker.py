@@ -22,6 +22,7 @@ bot_blocker.login()
 
 bot.logger.info("Starting blocker. Runs 24/7!")
 
+bot.logger.info("Caching followers for %s" % bot_blocker.username)
 follower_cache = set(bot.get_user_followers(bot_blocker.user_id))
 
 def stats():
