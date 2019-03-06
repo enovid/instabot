@@ -32,14 +32,14 @@ def block_followers_from_stalker_file():
     bot.logger.info("CURRENT FOLLOWERS: %s" % ', '.join(followers))
     bot.logger.info("BLOCK WORDS: %s" % ', '.join(bot.block_words))
     
-    bot.block_stalkers(bot_blocker)
+    bot.block_stalkers(bot_blocker=bot_blocker)
 
 def run_threaded(job_fn):
     job_thread = threading.Thread(target=job_fn)
     job_thread.start()
 
 # schedule.every(1).to(5).minutes.do(run_threaded, block_followers_from_stalker_file)
-schedule.every(1).minutes.do(run_threaded, block_followers_from_stalker_file)
+schedule.every(15).seconds.do(run_threaded, block_followers_from_stalker_file)
 
 while True:
     schedule.run_pending()
