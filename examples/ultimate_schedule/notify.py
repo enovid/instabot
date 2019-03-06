@@ -24,5 +24,4 @@ def sendText(msg="NA"):
 		body=msg)
 	
 	print(message.sid)
-	
-sendText("test message")
+
