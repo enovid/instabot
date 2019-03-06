@@ -1,8 +1,5 @@
 from twilio.rest import Client
-import os
-import sys
 
-sys.path.append(os.path.join(sys.path[0], '../../'))
 notify_secret = "notify_secret.txt"
 
 f = open(notify_secret)
