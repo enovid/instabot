@@ -593,9 +593,8 @@ bot = Bot(
         'karikatur',
         'jasa',
         'open'],
-    block_words=[
-        'fjjadklsjflaksdjfal',
-        'adskflhadshf'])
+    block_words=['fjjadklsjflaksdjfal', 'adskflhadshf'])
+
 
 bot.login()
 
