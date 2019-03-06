@@ -18,8 +18,8 @@ def block(self, user_id):
 
 def block_stalker(self, user_id):
     user_id = self.convert_to_user_id(user_id)
-    if self.check_not_stalker(user_id):
-        return True
+    # if self.check_not_stalker(user_id):
+    #     return True
     if not self.reached_limit('blocks'):
         self.logger.info("Blocking stalker.")
         self.delay('block')
@@ -91,8 +91,8 @@ def block_stalkers(self, bot_blocker=None):
                              self.get_user_info(user)[
                                  "username"])
             
-            if bot_blocker is not None:
-                bot_blocker.block_stalker(user)
-            else:
-                self.block_stalker(user)
-            
+            bot_blocker.block_stalker(user)
+            # if bot_blocker is not None:
+            #     bot_blocker.block_stalker(user)
+            # else:
+            #     self.block_stalker(user)
