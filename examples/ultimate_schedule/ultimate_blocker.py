@@ -11,13 +11,14 @@ import schedule
 from instabot import Bot, utils
 
 import config
+import notify
 
 block_words_list = utils.file(config.STALKER_FILE).list
 
 bot = Bot(block_words=block_words_list)
 bot.login()
-bot2 = Bot()
-bot2.login()
+bot_blocker = Bot()
+bot_blocker.login()
 bot.logger.info("ULTIMATE script. Safe to run 24/7!")
 
 def stats():
@@ -25,15 +26,13 @@ def stats():
 
 def block_followers_from_stalker_file():
     bot.logger.info("Checking followers for new stalkers.")
-    followers = bot.get_user_followers(bot.user_id)
+    followers = bot.get_user_followers(bot_blocker.user_id)
     bot._followers = followers
-    bot.logger.info("CURRENT FOLLOWING: %s" %
-                    ', '.join(bot.following))
-    bot.logger.info("CURRENT FOLLOWERS: %s" %
-                    ', '.join(followers))
-    bot.logger.info("BLOCK WORDS: %s" %
-                    ', '.join(bot.block_words))
-    # bot.block_stalkers()
+    bot.logger.info("CURRENT FOLLOWING: %s" % ', '.join(bot.following))
+    bot.logger.info("CURRENT FOLLOWERS: %s" % ', '.join(followers))
+    bot.logger.info("BLOCK WORDS: %s" % ', '.join(bot.block_words))
+    
+    bot.block_stalkers(bot_blocker)
 
 def run_threaded(job_fn):
     job_thread = threading.Thread(target=job_fn)
