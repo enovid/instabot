@@ -441,6 +441,7 @@ def menu_block():
         print("""
         1. Block bot
         2. Main menu
+        3. Filter new followers by subtring
         """)
         ans = input("how do you want to block?\n").strip()
         if ans == "1":
@@ -448,6 +449,10 @@ def menu_block():
             menu_block()
 
         elif ans == "2":
+            menu()
+
+        elif ans == "3":
+        	print("Test block menu. Returning to main menu...")
             menu()
 
         else:
