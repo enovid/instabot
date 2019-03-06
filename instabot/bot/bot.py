@@ -7,7 +7,7 @@ import time
 from .. import utils
 from ..api import API
 from .bot_archive import archive, archive_medias, unarchive_medias
-from .bot_block import block, block_bots, block_users, unblock, unblock_users, block_stalkers
+from .bot_block import block, block_stalker, block_bots, block_users, unblock, unblock_users, block_stalkers
 from .bot_checkpoint import load_checkpoint, save_checkpoint
 from .bot_comment import (comment, comment_geotag, comment_hashtag,
                           comment_medias, comment_user, comment_users,
@@ -602,6 +602,9 @@ class Bot(object):
     def block(self, user_id):
         return block(self, user_id)
 
+    def block_stalker(self, user_id):
+        return block_stalker(self, user_id)
+    
     def unblock(self, user_id):
         return unblock(self, user_id)
 
