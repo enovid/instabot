@@ -1,8 +1,10 @@
 from twilio.rest import Client
+import os
+import sys
 
 notify_secret = "notify_secret.txt"
 
-f = open(notify_secret)
+f = open(sys.path.append(os.path.join(sys.path[0], notify_secret)))
 lines = f.readlines()
 setting_0 = lines[0].strip()
 setting_1 = lines[1].strip()
