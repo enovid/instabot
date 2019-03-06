@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+STALKER_FILE = "stalkers.txt"
+
 BLACKLIST_FILE = "blacklist.txt"  # List of the users you don't want to follow
 
 WHITELIST_FILE = "whitelist.txt"  # List of the users you don't want to unfollow

@@ -447,13 +447,14 @@ def menu_block():
         if ans == "1":
             bot.block_bots()
             menu_block()
-
+            
         elif ans == "2":
-            menu()
-
-        elif ans == "3":
             bot.block_stalkers()
             menu_block()
+            
+        elif ans == "3":
+            menu()
+
 
         else:
             print("This number is not in the list?")
