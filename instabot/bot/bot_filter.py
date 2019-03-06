@@ -94,6 +94,19 @@ def search_stop_words_in_user(self, user_info):
 
     return False
 
+def search_block_words_in_username(self, user_info):
+    text = ''
+    if 'username' in user_info:
+        text += user_info['username'].lower()
+
+    if 'full_name' in user_info:
+        text += user_info['full_name'].lower()
+
+    for block_word in self.block_words:
+        if block_word in text:
+            return True
+
+    return False
 
 def search_blacklist_hashtags_in_media(self, media_id):
     media_info = self.get_media_info(media_id)
@@ -254,4 +267,27 @@ def check_not_bot(self, user_id):
         skipped.append(user_id)
         return False
 
+    return True
+
+def check_not_stalker(self, user_id):
+    """ Filter bot from real users. """
+    self.small_delay()
+    user_id = self.convert_to_user_id(user_id)
+    if not user_id:
+        return False
+
+    user_info = self.get_user_info(user_id)
+    if not user_info:
+        return True  # closed acc
+
+    if search_block_words_in_username(self, user_info):
+        msg = '`bot.search_block_words_in_username` found in user, skipping!'
+        msg = 'USER_NAME: {username}, FOLLOWING: {following}'
+        following_count = user_info["following_count"]
+        self.console_print(msg.format(
+            username=user_info["username"],
+            following=following_count
+        ))
+        return False
+    
     return True

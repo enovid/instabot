@@ -452,8 +452,8 @@ def menu_block():
             menu()
 
         elif ans == "3":
-        	print("Test block menu. Returning to main menu...")
-            menu()
+            bot.block_stalkers()
+            menu_block()
 
         else:
             print("This number is not in the list?")
@@ -592,7 +592,10 @@ bot = Bot(
         'vector',
         'karikatur',
         'jasa',
-        'open'])
+        'open'],
+    block_words=[
+        'fjjadklsjflaksdjfal',
+        'adskflhadshf'])
 
 bot.login()
 

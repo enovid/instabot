@@ -7,7 +7,7 @@ import time
 from .. import utils
 from ..api import API
 from .bot_archive import archive, archive_medias, unarchive_medias
-from .bot_block import block, block_bots, block_users, unblock, unblock_users
+from .bot_block import block, block_bots, block_users, unblock, unblock_users, block_stalkers
 from .bot_checkpoint import load_checkpoint, save_checkpoint
 from .bot_comment import (comment, comment_geotag, comment_hashtag,
                           comment_medias, comment_user, comment_users,
@@ -15,7 +15,7 @@ from .bot_comment import (comment, comment_geotag, comment_hashtag,
 from .bot_delete import delete_comment, delete_media, delete_medias
 from .bot_direct import (send_hashtag, send_like, send_media, send_medias,
                          send_message, send_messages, send_profile)
-from .bot_filter import check_media, check_not_bot, check_user, filter_medias
+from .bot_filter import check_media, check_not_bot, check_user, filter_medias, check_not_stalker
 from .bot_follow import (follow, follow_followers, follow_following,
                          follow_users)
 from .bot_get import (convert_to_user_id, get_archived_medias, get_comment,
@@ -89,6 +89,7 @@ class Bot(object):
                  unblock_delay=30,
                  message_delay=60,
                  stop_words=('shop', 'store', 'free'),
+                 block_words=('fjjadklsjflaksdjfal', 'adskflhadshf'),
                  blacklist_hashtags=['#shop', '#store', '#free'],
                  blocked_actions_protection=True,
                  verbosity=True,
@@ -158,6 +159,7 @@ class Bot(object):
         self.max_following_to_followers_ratio = max_following_to_followers_ratio
         self.min_media_count_to_follow = min_media_count_to_follow
         self.stop_words = stop_words
+        self.block_words = block_words
         self.blacklist_hashtags = blacklist_hashtags
 
         # limits - block
@@ -611,7 +613,10 @@ class Bot(object):
 
     def block_bots(self):
         return block_bots(self)
-
+    
+    def block_stalkers(self):
+        return block_stalkers(self)
+    
     # filter
 
     def filter_medias(self, media_items, filtration=True, quiet=False, is_comment=False):
@@ -625,7 +630,10 @@ class Bot(object):
 
     def check_not_bot(self, user):
         return check_not_bot(self, user)
-
+    
+    def check_not_stalker(self, user):
+        return check_not_stalker(self, user)
+    
     # support
 
     def check_if_file_exists(self, file_path, quiet=False):
