@@ -31,7 +31,7 @@ def block_followers_from_stalker_file():
     bot.logger.info("CURRENT FOLLOWING: %s" % ', '.join(bot.following))
     bot.logger.info("CURRENT FOLLOWERS: %s" % ', '.join(followers))
     bot.logger.info("BLOCK WORDS: %s" % ', '.join(bot.block_words))
-    
+    print(bot_blocker)
     bot.block_stalkers(bot_blocker)
 
 def run_threaded(job_fn):
