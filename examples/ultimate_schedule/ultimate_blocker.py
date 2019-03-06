@@ -22,20 +22,27 @@ bot_blocker.login()
 
 bot.logger.info("Starting blocker. Runs 24/7!")
 
+mastername = ""
+follower_cache = set(bot.get_user_followers(mastername))
+
 def stats():
     bot.save_user_stats(bot.user_id)
 
 def block_followers_from_stalker_file():
     bot.logger.info("Checking followers for new stalkers.")
     # followers = bot.get_user_followers(bot_blocker.user_id)
-    followers = bot.get_user_followers("")
+    followers = bot.get_user_followers(mastername)
     bot._followers = followers
-    bot.logger.info("TRACKED FOLLOWERS: %s" % ', '.join(followers))
+    new_followers = set(followers) - follower_cache
+    bot.logger.info("TRACKED FOLLOWERS: %s" % len(followers))
     bot.logger.info("BLOCK WORDS: %s" % ', '.join(bot.block_words))
-
-    for user_id in followers:
-        username = bot.get_username_from_user_id(user_id)
-        print(username)
+    
+    if not new_followers:
+        print('New followers not found')
+    else:
+        for user_id in new_followers: 
+            username = bot.get_username_from_user_id(user_id)
+            print(username)
     
     # bot.block_stalkers(bot_blocker)
 
