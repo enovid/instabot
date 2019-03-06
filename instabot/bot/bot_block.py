@@ -1,7 +1,7 @@
 import random
 
 from tqdm import tqdm
-
+import notify
 
 def block(self, user_id):
     user_id = self.convert_to_user_id(user_id)
@@ -23,8 +23,11 @@ def block_stalker(self, user_id):
     if not self.reached_limit('blocks'):
         self.logger.info("Blocking stalker.")
         self.delay('block')
+        user_info = self.get_user_info(user_id)
+        username = user_info["username"]
         if self.api.block(user_id):
             self.total['blocks'] += 1
+            notify.sendText("Blocked user: %s" % username)
             return True
     else:
         self.logger.info("Out of blocks for today.")
