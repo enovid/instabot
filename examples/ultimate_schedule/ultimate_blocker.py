@@ -16,6 +16,8 @@ block_words_list = utils.file(config.STALKER_FILE).list
 
 bot = Bot(block_words=block_words_list)
 bot.login()
+bot2 = Bot()
+bot2.login()
 bot.logger.info("ULTIMATE script. Safe to run 24/7!")
 
 def stats():
