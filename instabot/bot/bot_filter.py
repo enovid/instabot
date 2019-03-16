@@ -279,7 +279,8 @@ def check_not_stalker(self, user_id):
     user_info = self.get_user_info(user_id)
     if not user_info:
         return True  # closed acc
-
+    
+    # Check username for stalker-associated substrings
     if search_block_words_in_username(self, user_info):
         msg = '`bot.search_block_words_in_username` found in user, skipping!'
         msg = 'USER_NAME: {username}, FOLLOWING: {following}'
@@ -288,6 +289,15 @@ def check_not_stalker(self, user_id):
             username=user_info["username"],
             following=following_count
         ))
+        return False
+    
+    # Check other user info for indication of a throwaway account
+    follower_count = user_info["follower_count"]
+    following_count = user_info["following_count"]
+    # if "is_private" in user_info:
+    #     if user_info["is_private"]:
+    #         return False
+    if follower_count < 5 or following_count < 5:
         return False
     
     return True
