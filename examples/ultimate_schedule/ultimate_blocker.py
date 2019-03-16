@@ -51,8 +51,9 @@ def run_threaded(job_fn):
     job_thread = threading.Thread(target=job_fn)
     job_thread.start()
 
+schedule.every(30).seconds.do(block_followers_from_stalker_file)
+# schedule.every(30).seconds.do(run_threaded, block_followers_from_stalker_file)
 # schedule.every(1).to(5).minutes.do(run_threaded, block_followers_from_stalker_file)
-schedule.every(30).seconds.do(run_threaded, block_followers_from_stalker_file)
 # run_threaded(block_followers_from_stalker_file)
 
 while True:
