@@ -10,6 +10,7 @@ import schedule
 from instabot import Bot, utils
 
 import config
+import functools
 
 block_words_list = utils.file(config.STALKER_FILE).list
 
@@ -24,6 +25,22 @@ bot.logger.info("Starting blocker. Runs 24/7!")
 bot.logger.info("Caching followers for %s" % bot_blocker.username)
 follower_cache = set(bot.get_user_followers(bot_blocker.user_id))
 
+
+def catch_exceptions(cancel_on_failure=False):
+    def catch_exceptions_decorator(job_func):
+        @functools.wraps(job_func)
+        def wrapper(*args, **kwargs):
+            try:
+                return job_func(*args, **kwargs)
+            except:
+                import traceback
+                print(traceback.format_exc())
+                if cancel_on_failure:
+                    return schedule.CancelJob
+        return wrapper
+    return catch_exceptions_decorator
+
+@catch_exceptions(cancel_on_failure=True)
 def block_followers_from_stalker_file():
     global follower_cache
     bot.logger.info("Checking followers for new stalkers.")
