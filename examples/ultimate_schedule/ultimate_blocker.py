@@ -40,7 +40,7 @@ def catch_exceptions(cancel_on_failure=False):
         return wrapper
     return catch_exceptions_decorator
 
-@catch_exceptions(cancel_on_failure=True)
+@catch_exceptions(cancel_on_failure=False)
 def block_followers_from_stalker_file():
     global follower_cache
     bot.logger.info("Checking followers for new stalkers.")
